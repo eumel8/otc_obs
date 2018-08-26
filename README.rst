@@ -33,17 +33,19 @@ list OBS buckets::
 
     ansible-playbook s3.yml -e "localaction=list" --vault-password-file vars/vaultpass.txt
 
+    ansible-playbook s3.yml -e "localaction=list"
+
 create OBS bucket::
 
-    ansible-playbook s3.yml -e "bucket=mybucket" -e "localaction=create" --vault-password-file vars/vaultpass.txt
+    ansible-playbook s3.yml -e "bucket=mybucket" -e "localaction=create"
 
 delete OBS bucket::
 
-    ansible-playbook s3.yml -e "bucket=mybucket" -e "localaction=delete" --vault-password-file vars/vaultpass.txt
+    ansible-playbook s3.yml -e "bucket=mybucket" -e "localaction=delete"
 
 upload files in OBS (VHD, ZVHD, VMDK, QCOW2 are supported for otc image service)::
 
-    ansible-playbook s3.yml -e "bucket=mybucket" -e "object=xenial-server-cloudimg-amd64-disk1.vmdk" -e "localaction=upload" --vault-password-file vars/vaultpass.txt
+    ansible-playbook s3.yml -e "bucket=mybucket" -e "object=xenial-server-cloudimg-amd64-disk1.vmdk" -e "localaction=upload"
 
 delete OBS objects::
 
