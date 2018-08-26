@@ -21,9 +21,11 @@ branches:
     - master
 
 install:
+  # Prerequisites packages
+  - apt -y install xmllint
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
-  - pip install ansible-lint jmespath xmllint
+  - pip install ansible-lint jmespath
 
 script:
   # Check the role/playbook's syntax.
