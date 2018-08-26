@@ -1,0 +1,4 @@
+- name: otc_obs
+  scm: git
+  src: https://github.com/eumel8/otc_obs.git
+  version: master
