@@ -14,6 +14,7 @@
     set -o pipefail
     exit_code=0
     echo -en "PUT\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/{{ bucket }}" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64
+    exit ${exit_code}
   args:
     warn: no
     executable: /bin/bash
