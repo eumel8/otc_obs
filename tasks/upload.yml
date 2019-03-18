@@ -10,11 +10,7 @@
     EC2_URL: "{{ lookup('env','EC2_URL') | default('https://obs.otc.t-systems.com',true) }}"
     EC2_ACCESS_KEY: "{{ lookup('env','EC2_ACCESS_KEY') }}"
     EC2_SECRET_KEY: "{{ lookup('env','EC2_SECRET_KEY') }}"
-<<<<<<< HEAD
-  shell: set -o pipefail; bash -ce 'echo -en "PUT\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/{{ bucket }}/{{ object }}" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64'
-=======
   shell: bash -c 'echo -en "PUT\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/{{ bucket }}/{{ object }}" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64'
->>>>>>> parent of 2abcfb0... ansible-lint - set pipefail to prevent 306 error
   register: signature
 
 - name: curl request upload data
