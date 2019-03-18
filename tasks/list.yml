@@ -22,7 +22,10 @@
   register: curlresponse
 
 - name: xmllint output
-  shell: set -o pipefail; echo '{{ curlresponse.stdout }}' | xmllint --format -
+  shell: |
+    set -o pipefail
+    exit_code=0
+    echo '{{ curlresponse.stdout }}' | xmllint --format -
   register: xmlout
 
 - debug:
