@@ -10,8 +10,7 @@
     EC2_URL: "{{ lookup('env','EC2_URL') | default('https://obs.otc.t-systems.com',true) }}"
     EC2_ACCESS_KEY: "{{ lookup('env','EC2_ACCESS_KEY') }}"
     EC2_SECRET_KEY: "{{ lookup('env','EC2_SECRET_KEY') }}"
-  shell: bash -c 'echo -en "GET\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64'
-  pipefail: True
+  shell: bash -ce 'echo -en "GET\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64'
   register: signature
 
 - name: curl request
@@ -24,7 +23,6 @@
 
 - name: xmllint output
   shell: echo '{{ curlresponse.stdout }}' | xmllint --format -
-  pipefail: True
   register: xmlout
 
 - debug:

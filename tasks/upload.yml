@@ -10,8 +10,7 @@
     EC2_URL: "{{ lookup('env','EC2_URL') | default('https://obs.otc.t-systems.com',true) }}"
     EC2_ACCESS_KEY: "{{ lookup('env','EC2_ACCESS_KEY') }}"
     EC2_SECRET_KEY: "{{ lookup('env','EC2_SECRET_KEY') }}"
-  shell: bash -c 'echo -en "PUT\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/{{ bucket }}/{{ object }}" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64'
-  pipefail: True
+  shell: bash -ce 'echo -en "PUT\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/{{ bucket }}/{{ object }}" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64'
   register: signature
 
 - name: curl request upload data
@@ -20,7 +19,6 @@
     EC2_ACCESS_KEY: "{{ lookup('env','EC2_ACCESS_KEY') }}"
     EC2_SECRET_KEY: "{{ lookup('env','EC2_SECRET_KEY') }}"
   command: 'curl -X PUT -H "Authorization: AWS {{ EC2_ACCESS_KEY }}:{{ signature.stdout }}" -H "x-amz-date: {{ sigdate.stdout }}" -T {{ object }} {{ EC2_URL }}/{{ bucket }}/{{ object }}'
-  pipefail: True
   register: curlresponse
 
 - debug:
