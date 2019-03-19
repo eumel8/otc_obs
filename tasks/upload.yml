@@ -12,7 +12,9 @@
     EC2_SECRET_KEY: "{{ lookup('env','EC2_SECRET_KEY') }}"
   shell: |
     set -o pipefail
+    exit_code=0
     echo -en "PUT\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/{{ bucket }}/{{ object }}" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64
+    exit ${exit_code}
   args:
     warn: no
     executable: /bin/bash

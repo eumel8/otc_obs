@@ -18,7 +18,6 @@
   args:
     warn: no
     executable: /bin/bash
-
   register: signature
 
 - name: curl request create bucket
