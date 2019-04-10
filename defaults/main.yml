@@ -1,2 +1,3 @@
 ---
 # defaults file for otc_obs
+delegateto: "localhost"
