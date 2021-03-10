@@ -1,6 +1,7 @@
 skip_list:
   - '204'
-  - '301'
-  - '303'
-  - '305'
-  - '306'
+  - var-spacing
+  - line-length
+  - no-changed-when
+  - command-instead-of-module
+  - command-instead-of-shell
