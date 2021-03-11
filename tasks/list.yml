@@ -39,5 +39,6 @@
     executable: /bin/bash
   register: xmlout
 
-- debug:
+- name: xmlout
+  debug:
     msg: "{{ xmlout.stdout_lines }}"

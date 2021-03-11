@@ -28,5 +28,6 @@
   command: 'curl -X PUT -H "Authorization: AWS {{ EC2_ACCESS_KEY }}:{{ signature.stdout }}" -H "x-amz-date: {{ sigdate.stdout }}" -T {{ object }} {{ EC2_URL }}/{{ bucket }}/{{ object }}'
   register: curlresponse
 
-- debug:
+- name: curlresponse
+  debug:
     msg: "{{ curlresponse.stdout_lines }}"

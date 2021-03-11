@@ -28,5 +28,6 @@
   command: 'curl -X DELETE -H "Authorization: AWS {{ EC2_ACCESS_KEY }}:{{ signature.stdout }}" -H "x-amz-date: {{ sigdate.stdout }}" {{ EC2_URL }}/{{ bucket }}/{{ object }}'
   register: curlresponse
 
-- debug:
+- name: curlresponse
+  debug:
     msg: "{{ curlresponse.stdout_lines }}"
