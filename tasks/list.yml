@@ -16,7 +16,7 @@
     echo -en "GET\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64
     exit ${exit_code}
   args:
-    warn: no
+    warn: false
     executable: /bin/bash
   register: signature
 
@@ -35,9 +35,10 @@
     echo '{{ curlresponse.stdout }}' | xmllint --format -
     exit ${exit_code}
   args:
-    warn: no
+    warn: false
     executable: /bin/bash
   register: xmlout
 
-- debug:
+- name: xmlout
+  debug:
     msg: "{{ xmlout.stdout_lines }}"

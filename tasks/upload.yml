@@ -16,7 +16,7 @@
     echo -en "PUT\n\n\n\nx-amz-date:{{ sigdate.stdout }}\n/{{ bucket }}/{{ object }}" | openssl sha1 -hmac {{ EC2_SECRET_KEY }} -binary | base64
     exit ${exit_code}
   args:
-    warn: no
+    warn: false
     executable: /bin/bash
   register: signature
 
@@ -28,5 +28,6 @@
   command: 'curl -X PUT -H "Authorization: AWS {{ EC2_ACCESS_KEY }}:{{ signature.stdout }}" -H "x-amz-date: {{ sigdate.stdout }}" -T {{ object }} {{ EC2_URL }}/{{ bucket }}/{{ object }}'
   register: curlresponse
 
-- debug:
+- name: curlresponse
+  debug:
     msg: "{{ curlresponse.stdout_lines }}"
